@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAGA MOBILES | Billing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <img class="brand-logo" src="logo.svg" alt="NAGA MOBILES">
+                <div class="brand-text">
+                    <h1>NAGA MOBILES</h1>
+                    <p class="brand-subtitle">Billing & Inventory</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="products">
+                    Products
+                </button>
+                <button class="nav-tab" data-tab="cart">
+                    Cart
+                </button>
+                <button class="nav-tab" data-tab="reports">
+                    Reports
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Products Tab -->
+            <div id="products-tab" class="tab-content active">
+                <div class="tab-header">
+                    <h2>Products</h2>
+                    <button class="btn btn-primary" id="add-product-btn">
+                        Add Product
+                    </button>
+                </div>
+                <div id="products-grid" class="products-grid">
+                    <!-- Products will be rendered here -->
+                </div>
+            </div>
+
+            <!-- Cart Tab -->
+            <div id="cart-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Shopping Cart</h2>
+                    <button class="btn btn-danger" id="clear-cart-btn" style="display: none;">
+                        Clear Cart
+                    </button>
+                </div>
+                <div id="cart-items">
+                    <!-- Cart items will be rendered here -->
+                </div>
+                <div id="cart-summary" style="display: none;">
+                    <div class="cart-total">
+                        <span class="total-label">Total:</span>
+                        <span class="total-amount" id="cart-total">₹0.00</span>
+                    </div>
+                    <p id="price-warning" class="warning" style="display: none;">
+                        Please enter prices for all items before generating invoice.
+                    </p>
+                    <button class="btn btn-success btn-large" id="generate-invoice-btn">
+                        Generate Invoice
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="reports-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Sales Reports</h2>
+                </div>
+                <div class="reports-controls">
+                    <div class="report-type-selector">
+                        <button class="btn btn-secondary report-type-btn active" data-type="daily">Daily Report</button>
+                        <button class="btn btn-secondary report-type-btn" data-type="monthly">Monthly Report</button>
+                    </div>
+                    <div id="daily-controls" class="report-controls">
+                        <label>
+                            Select Date:
+                            <input type="date" id="daily-date" class="form-input">
+                        </label>
+                        <button class="btn btn-primary" id="generate-daily-btn">Generate Report</button>
+                    </div>
+                    <div id="monthly-controls" class="report-controls" style="display: none;">
+                        <label>
+                            Year:
+                            <input type="number" id="monthly-year" class="form-input" min="2020" max="2099">
+                        </label>
+                        <label>
+                            Month:
+                            <select id="monthly-month" class="form-input">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </label>
+                        <button class="btn btn-primary" id="generate-monthly-btn">Generate Report</button>
+                    </div>
+                </div>
+                <div id="report-results">
+                    <!-- Report results will be rendered here -->
+                </div>
+            </div>
+
+            <!-- Invoice Display -->
+            <div id="invoice-display" class="invoice-container" style="display: none;">
+                <div class="invoice-header">
+                    <h2>Invoice</h2>
+                    <div class="invoice-actions">
+                        <button class="btn btn-primary" id="print-invoice-btn">
+                            Print Bill
+                        </button>
+                        <button class="btn btn-secondary" id="close-invoice-btn">
+                            Close
+                        </button>
+                    </div>
+                </div>
+                <div id="invoice-content">
+                    <!-- Invoice content will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <img class="footer-logo" src="logo.svg" alt="NAGA MOBILES">
+                <div>
+                    <div class="footer-brand">NAGA MOBILES</div>
+                    <div class="footer-subtitle">Billing system (browser-based)</div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-meta">Data is stored in this browser (localStorage).</div>
+                <div class="footer-actions">
+                    <button class="btn btn-danger btn-sm" id="reset-data-btn" type="button">Reset cache</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add Product</h3>
+                <button class="modal-close" id="close-modal-btn">&times;</button>
+            </div>
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-image">Image URL</label>
+                    <input type="url" id="product-image" class="form-input" placeholder="Paste an image link (optional)">
+                    <p class="help-text">Tip: You can also upload an image below.</p>
+                </div>
+                <div class="form-group">
+                    <label for="product-image-file">Upload Image</label>
+                    <input type="file" id="product-image-file" class="form-input" accept="image/*">
+                    <p class="help-text">Uploaded images are saved inside this browser (localStorage).</p>
+                </div>
+                <div class="form-group" id="image-preview-container" style="display: none;">
+                    <img id="image-preview" src="" alt="Preview" class="image-preview">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-product-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-product-btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add-to-cart Dialog -->
+    <div id="select-dialog" class="modal" style="display:none;">
+        <div class="modal-content modal-compact">
+            <div class="modal-header">
+                <h3>Add to Cart</h3>
+                <button class="modal-close" id="select-dialog-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="select-dialog-body">
+                <img id="select-dialog-image" class="select-dialog-image" alt="">
+                <div class="select-dialog-meta">
+                    <div id="select-dialog-name" class="select-dialog-name"></div>
+                    <div class="help-text">This will add 1 quantity to the cart. Price can be entered in the cart.</div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="select-dialog-cancel">Cancel</button>
+                <button type="button" class="btn btn-primary" id="select-dialog-confirm">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
