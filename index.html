@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naga Mobiles | Premium Tech Hub — Coimbatore</title>
+<meta name="description" content="Naga Mobiles — Coimbatore's most trusted destination for premium smartphones, authentic accessories, and expert chip-level repairs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:        #020408;
+  --surface:   #060d1a;
+  --glass:     rgba(6, 16, 36, 0.6);
+  --border:    rgba(0, 200, 255, 0.12);
+  --glow:      #00c8ff;
+  --glow2:     #7c3aed;
+  --glow3:     #06ffa5;
+  --text:      #e8f4ff;
+  --muted:     #5a7a9a;
+  --dim:       rgba(232, 244, 255, 0.5);
+  --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-h:     70px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ───────────────────────── */
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--glow);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: transform 0.15s var(--ease), opacity 0.2s;
+}
+#cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(0,200,255,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.4s var(--ease), width 0.3s, height 0.3s, border-color 0.3s;
+}
+body:hover #cursor { opacity: 1; }
+
+/* ── NOISE OVERLAY ───────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.4;
+}
+
+/* ── AMBIENT BG ──────────────────────────── */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  animation: drift 20s ease-in-out infinite alternate;
+}
+.orb1 { width: 600px; height: 600px; background: rgba(0,200,255,0.06); top: -200px; left: -100px; animation-delay: 0s; }
+.orb2 { width: 500px; height: 500px; background: rgba(124,58,237,0.07); bottom: -100px; right: -100px; animation-delay: -7s; }
+.orb3 { width: 300px; height: 300px; background: rgba(6,255,165,0.05); top: 50%; left: 40%; animation-delay: -14s; }
+
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, 40px) scale(1.1); }
+}
+
+/* ── SCANLINES ───────────────────────────── */
+.ambient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* ── NAV ─────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  z-index: 1000;
+  transition: all 0.5s var(--ease);
+}
+nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 4, 8, 0.5);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  z-index: -1;
+  transition: background 0.4s;
+}
+nav.solid::before { background: rgba(2, 4, 8, 0.92); }
+
+.logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.logo-icon {
+  width: 32px; height: 32px;
+  border: 2px solid var(--glow);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.logo-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,200,255,0.2), transparent);
+  animation: shimmer 3s infinite;
+}
+.logo-icon svg { z-index: 1; }
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.logo-text { color: var(--text); }
+.logo-text span { color: var(--glow); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--muted);
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s;
+  position: relative;
+  text-decoration: none;
+}
+.nav-links a:hover { color: var(--text); background: rgba(0,200,255,0.06); }
+.nav-links a.active { color: var(--glow); }
+
+.nav-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--glow);
+  color: var(--glow);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.nav-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glow);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+  z-index: -1;
+}
+.nav-cta:hover::before { transform: scaleX(1); }
+.nav-cta:hover { color: #000; }
+
+/* ── HERO ────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: var(--nav-h) 6% 0;
+}
+
+/* Geometric grid lines */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+
+/* Rotating ring decoration */
+.hero-ring {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,200,255,0.06);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 40s linear infinite;
+}
+.hero-ring::before {
+  content: '';
+  position: absolute;
+  width: 900px; height: 900px;
+  border-radius: 50%;
+  border: 1px solid rgba(124,58,237,0.05);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.hero-ring::after {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  background: var(--glow);
+  border-radius: 50%;
+  top: -3px; left: 50%;
+  box-shadow: 0 0 20px var(--glow), 0 0 60px rgba(0,200,255,0.5);
+}
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  text-align: center;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  color: var(--glow);
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border: 1px solid rgba(0,200,255,0.25);
+  border-radius: 100px;
+  background: rgba(0,200,255,0.06);
+  margin-bottom: 40px;
+  animation: fadeUp 1s var(--ease) both;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--glow3);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--glow3);
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100% {opacity:1;} 50% {opacity:0.2;} }
+
+.hero h1 {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(3rem, 9vw, 8.5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 28px;
+  animation: fadeUp 1s var(--ease) 0.1s both;
+}
+.hero h1 .line1 {
+  display: block;
+  background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero h1 .line2 {
+  display: block;
+  background: linear-gradient(90deg, var(--glow) 0%, var(--glow2) 60%, var(--glow3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(0,200,255,0.4));
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: var(--dim);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto 50px;
+  animation: fadeUp 1s var(--ease) 0.2s both;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 1s var(--ease) 0.3s both;
+}
+
+.btn-primary {
+  padding: 15px 36px;
+  border-radius: 10px;
+  background: var(--glow);
+  color: #000;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease);
+  box-shadow: 0 0 30px rgba(0,200,255,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0,200,255,0.35);
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+.btn-primary:hover::after { left: 100%; }
+
+.btn-secondary {
+  padding: 15px 36px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  backdrop-filter: blur(10px);
+}
+.btn-secondary:hover {
+  border-color: rgba(0,200,255,0.4);
+  background: rgba(0,200,255,0.06);
+  transform: translateY(-3px);
+}
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: fadeUp 1s var(--ease) 0.6s both;
+}
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--glow), transparent);
+  animation: scrollAnim 2s ease-in-out infinite;
+}
+@keyframes scrollAnim {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+}
+
+/* ── STATS BAR ───────────────────────────── */
+.stats-bar {
+  padding: 0 6%;
+  margin-bottom: 120px;
+}
+.stats-inner {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  overflow: hidden;
+}
+.stat-item {
+  padding: 32px 36px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s var(--ease);
+}
+.stat-item:last-child { border-right: none; }
+.stat-item.show { opacity: 1; transform: translateY(0); }
+.stat-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.4rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--text), var(--glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+  font-family: 'DM Mono', monospace;
+}
+.stat-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glow), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.stat-item:hover::after { opacity: 0.6; }
+
+/* ── SERVICES ────────────────────────────── */
+.section {
+  padding: 0 6% 120px;
+}
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 3px;
+  color: var(--glow);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-tag::before {
+  content: '//';
+  opacity: 0.5;
+}
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+/* Services Grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 260px;
+  gap: 16px;
+}
+
+.svc-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), border-color 0.3s;
+}
+.svc-card.show { opacity: 1; transform: translateY(0); }
+.svc-card:hover { border-color: rgba(0,200,255,0.35); }
+.svc-card:hover .card-glow { opacity: 1; }
+.svc-card:hover .card-arrow { transform: translate(4px, -4px); opacity: 1; }
+.svc-card:hover .card-bg { transform: scale(1.05); }
+
+.svc-card.c1 { grid-column: span 5; grid-row: span 2; }
+.svc-card.c2 { grid-column: span 4; }
+.svc-card.c3 { grid-column: span 3; }
+.svc-card.c4 { grid-column: span 3; }
+.svc-card.c5 { grid-column: span 4; }
+
+.card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s var(--ease);
+  filter: brightness(0.3) saturate(0.7);
+}
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(2,4,8,0.96) 0%, rgba(2,4,8,0.4) 50%, transparent 100%);
+}
+.card-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.card-body {
+  position: absolute;
+  inset: 0;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 2;
+}
+.card-icon {
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,200,255,0.08);
+  margin-bottom: 16px;
+  transition: all 0.3s;
+}
+.svc-card:hover .card-icon {
+  border-color: var(--glow);
+  background: rgba(0,200,255,0.15);
+  box-shadow: 0 0 20px rgba(0,200,255,0.2);
+}
+.card-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--glow);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.card-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.card-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.card-arrow {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 1rem;
+  color: var(--glow);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+/* ── WHY US ──────────────────────────────── */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 120px;
+}
+
+.why-card {
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s var(--ease);
+}
+.why-card.show { opacity: 1; transform: translateY(0); }
+.why-card:hover { border-color: rgba(0,200,255,0.3); }
+.why-card:hover .why-glow { opacity: 0.15; }
+
+.why-glow {
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 150px; height: 150px;
+  background: var(--glow);
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.why-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(0,200,255,0.08);
+  position: absolute;
+  top: 16px; right: 20px;
+  line-height: 1;
+}
+.why-icon {
+  font-size: 1.5rem;
+  margin-bottom: 18px;
+}
+.why-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+.why-text {
+  font-size: 0.83rem;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+/* ── MARQUEE ─────────────────────────────── */
+.marquee-wrap {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,200,255,0.025);
+  padding: 18px 0;
+  overflow: hidden;
+  margin-bottom: 120px;
+  position: relative;
+}
+.marquee-track {
+  display: flex;
+  gap: 60px;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.marquee-item span { color: var(--glow); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ── CONTACT ─────────────────────────────── */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 120px;
+}
+
+.contact-info {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 50px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+.contact-info::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--glow), var(--glow2), var(--glow3));
+}
+
+.contact-form-wrap {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 50px;
+  backdrop-filter: blur(20px);
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+.form-label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.form-input {
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s;
+}
+.form-input:focus {
+  border-color: var(--glow);
+  background: rgba(0,200,255,0.04);
+  box-shadow: 0 0 0 3px rgba(0,200,255,0.08);
+}
+.form-input::placeholder { color: var(--muted); }
+
+textarea.form-input { resize: none; height: 110px; }
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.contact-detail:last-of-type { border-bottom: none; }
+.detail-icon {
+  width: 42px; height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,200,255,0.06);
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+.detail-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.detail-value {
+  font-size: 0.92rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.detail-value a { color: inherit; text-decoration: none; }
+.detail-value a:hover { color: var(--glow); }
+
+.map-placeholder {
+  margin-top: 28px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  height: 180px;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+.map-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* ── FOOTER ──────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.footer-links {
+  display: flex;
+  gap: 30px;
+}
+.footer-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--glow); }
+
+/* ── WHATSAPP ────────────────────────────── */
+.wa-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  width: 54px; height: 54px;
+  border-radius: 14px;
+  background: #25D366;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(37,211,102,0.35);
+  transition: all 0.3s var(--ease);
+  text-decoration: none;
+}
+.wa-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 16px 40px rgba(37,211,102,0.5);
+}
+.wa-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 18px;
+  border: 1px solid rgba(37,211,102,0.3);
+  animation: pulse 2.5s infinite;
+}
+@keyframes pulse { to { transform: scale(1.4); opacity: 0; } }
+
+/* ── FADE IN ─────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 1100px) {
+  .services-grid { grid-template-columns: repeat(6, 1fr); }
+  .svc-card.c1 { grid-column: span 6; grid-row: span 1; }
+  .svc-card.c2, .svc-card.c3, .svc-card.c4, .svc-card.c5 { grid-column: span 3; }
+}
+@media (max-width: 900px) {
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-wrap { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .services-grid { grid-template-columns: 1fr; }
+  .svc-card.c1, .svc-card.c2, .svc-card.c3, .svc-card.c4, .svc-card.c5 { grid-column: 1; grid-row: span 1; }
+  .why-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .hero h1 { letter-spacing: -1px; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<div class="ambient">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="16" height="16" fill="none" stroke="#00c8ff" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+    </div>
+    <div class="logo-text">NAGA <span>MOBILES</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Book Repair</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Premium Tech Hub · Coimbatore · Est. 2010</div>
+    <h1>
+      <span class="line1">ELEVATE YOUR</span>
+      <span class="line2">DIGITAL LIFE</span>
+    </h1>
+    <p class="hero-sub">Coimbatore's most advanced destination for flagship smartphones, premium accessories & expert chip-level repairs. Engineered for the future.</p>
+    <div class="hero-ctas">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#contact" class="btn-secondary">Book a Repair →</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar" id="about">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Years of Excellence</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10K+</div>
+      <div class="stat-label">Devices Repaired</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Premium Products</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Customer Rating</div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Apple iPhone <span>●</span></div>
+    <div class="marquee-item">Samsung Galaxy <span>●</span></div>
+    <div class="marquee-item">OnePlus <span>●</span></div>
+    <div class="marquee-item">Chip-Level Repair <span>●</span></div>
+    <div class="marquee-item">Screen Replacement <span>●</span></div>
+    <div class="marquee-item">Data Recovery <span>●</span></div>
+    <div class="marquee-item">Premium Accessories <span>●</span></div>
+    <div class="marquee-item">Software Unlock <span>●</span></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="marquee-item">Apple iPhone <span>●</span></div>
+    <div class="marquee-item">Samsung Galaxy <span>●</span></div>
+    <div class="marquee-item">OnePlus <span>●</span></div>
+    <div class="marquee-item">Chip-Level Repair <span>●</span></div>
+    <div class="marquee-item">Screen Replacement <span>●</span></div>
+    <div class="marquee-item">Data Recovery <span>●</span></div>
+    <div class="marquee-item">Premium Accessories <span>●</span></div>
+    <div class="marquee-item">Software Unlock <span>●</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Our Services</div>
+      <h2 class="section-title">WHAT WE<br>OFFER</h2>
+    </div>
+    <a href="#contact" class="btn-secondary">View All →</a>
+  </div>
+
+  <div class="services-grid">
+    <!-- Card 1 — Large -->
+    <div class="svc-card c1">
+      <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1616348436168-de43ad0db179?auto=format&fit=crop&w=800&q=80')"></div>
+      <div class="card-overlay"></div>
+      <div class="card-glow" style="background: radial-gradient(ellipse at bottom left, rgba(0,200,255,0.15), transparent 70%)"></div>
+      <div class="card-body">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="#00c8ff" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <div class="card-num">01 / FLAGSHIP</div>
+        <div class="card-title">PREMIUM<br>SMARTPHONES</div>
+        <div class="card-desc">Authorized sales of the latest flagship devices from Apple, Samsung & OnePlus. Every unit genuine, every price transparent.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="svc-card c2">
+      <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=600&q=80')"></div>
+      <div class="card-overlay"></div>
+      <div class="card-glow" style="background: radial-gradient(ellipse at bottom, rgba(124,58,237,0.2), transparent 70%)"></div>
+      <div class="card-body">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="#7c3aed" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="card-num">02 / SERVICE</div>
+        <div class="card-title">EXPERT REPAIRS</div>
+        <div class="card-desc">Chip-level motherboard servicing, instant screen replacements, battery swaps with warranty.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="svc-card c3">
+      <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80')"></div>
+      <div class="card-overlay"></div>
+      <div class="card-glow" style="background: radial-gradient(ellipse at bottom, rgba(6,255,165,0.15), transparent 70%)"></div>
+      <div class="card-body">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="#06ffa5" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <div class="card-num">03 / GEAR</div>
+        <div class="card-title">ACCESSORIES</div>
+        <div class="card-desc">Curated cases, chargers, and hi-fi audio gear from premium global brands.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="svc-card c4">
+      <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=600&q=80')"></div>
+      <div class="card-overlay"></div>
+      <div class="card-glow" style="background: radial-gradient(ellipse at bottom, rgba(0,200,255,0.12), transparent 70%)"></div>
+      <div class="card-body">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="#00c8ff" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="card-num">04 / TECH</div>
+        <div class="card-title">SOFTWARE</div>
+        <div class="card-desc">Flashing, unlocking, and specialized data recovery services handled by certified technicians.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="svc-card c5">
+      <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=800&q=80')"></div>
+      <div class="card-overlay"></div>
+      <div class="card-glow" style="background: radial-gradient(ellipse at bottom, rgba(124,58,237,0.15), transparent 70%)"></div>
+      <div class="card-body">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="#7c3aed" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="card-num">05 / SUPPORT</div>
+        <div class="card-title">SAME-DAY SERVICE</div>
+        <div class="card-desc">Most repairs completed within 2–4 hours. Walk in, walk out with a working device.</div>
+      </div>
+      <div class="card-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section" id="why">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Why Choose Us</div>
+      <h2 class="section-title">THE NAGA<br>DIFFERENCE</h2>
+    </div>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-glow"></div>
+      <div class="why-num">01</div>
+      <div class="why-icon">🔬</div>
+      <div class="why-title">CHIP-LEVEL MASTERY</div>
+      <div class="why-text">Our engineers go beyond board-swap repairs — diagnosing and fixing at the circuit level saves you thousands over replacements.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-glow" style="background: var(--glow2)"></div>
+      <div class="why-num">02</div>
+      <div class="why-icon">✅</div>
+      <div class="why-title">GENUINE PARTS ONLY</div>
+      <div class="why-text">Every component we use is 100% OEM or certified — no grey-market parts, ever. Your device stays authentic.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-glow" style="background: var(--glow3)"></div>
+      <div class="why-num">03</div>
+      <div class="why-icon">🛡️</div>
+      <div class="why-title">REPAIR WARRANTY</div>
+      <div class="why-text">We stand behind every repair with a written service warranty — because confidence is part of the job.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-glow"></div>
+      <div class="why-num">04</div>
+      <div class="why-icon">⚡</div>
+      <div class="why-title">SAME-DAY TURNAROUND</div>
+      <div class="why-text">Most screen and battery jobs done in under 3 hours. No waiting days for a working phone.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-glow" style="background: var(--glow2)"></div>
+      <div class="why-num">05</div>
+      <div class="why-icon">💰</div>
+      <div class="why-title">TRANSPARENT PRICING</div>
+      <div class="why-text">Free diagnostics, upfront quotes. No surprises on your bill — what we quote is what you pay.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-glow" style="background: var(--glow3)"></div>
+      <div class="why-num">06</div>
+      <div class="why-icon">📍</div>
+      <div class="why-title">CENTRAL LOCATION</div>
+      <div class="why-text">Conveniently located in Peelamedu, Coimbatore — easy access from all major areas of the city.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">REACH OUT<br>TO US</h2>
+    </div>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h3 style="font-family:'Orbitron',monospace; font-size:1.2rem; margin-bottom:6px;">Visit Our Store</h3>
+      <p style="color:var(--muted); font-size:0.83rem; margin-bottom:28px;">Walk in or call ahead — we're ready to help every day.</p>
+
+      <div class="contact-detail">
+        <div class="detail-icon">📍</div>
+        <div>
+          <div class="detail-label">Address</div>
+          <div class="detail-value">33, Masakalipalayam Rd, Peelamedu,<br>Coimbatore, Tamil Nadu 641004</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-icon">📞</div>
+        <div>
+          <div class="detail-label">Phone / WhatsApp</div>
+          <div class="detail-value"><a href="tel:+918110056006">+91 81100 56006</a></div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-icon">🕐</div>
+        <div>
+          <div class="detail-label">Working Hours</div>
+          <div class="detail-value">Mon – Sat: 9:00 AM – 8:30 PM<br>Sun: 10:00 AM – 6:00 PM</div>
+        </div>
+      </div>
+
+     
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125319.85593450055!2d76.86598599726565!3d11.020198499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba85783a25251dd%3A0x121a63acfa10b213!2sNaga%20Mobiles!5e0!3m2!1sen!2sin!4v1776082731008!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   
+ 
+</div>
+    <div class="contact-form-wrap">
+      <h3 style="font-family:'Orbitron',monospace; font-size:1.2rem; margin-bottom:6px;">Send a Message</h3>
+      <p style="color:var(--muted); font-size:0.83rem; margin-bottom:28px;">Get a repair estimate or enquire about any product.</p>
+
+      <form action="https://formspree.io/f/mvzdogva" method="POST">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div class="form-group">
+      <label class="form-label">Your Name</label>
+      <input type="text" name="name" class="form-input" placeholder="Rajesh Kumar" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone / Email</label>
+      <input type="text" name="contact" class="form-input" placeholder="99XXXXXXXX" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Device & Issue</label>
+    <input type="text" name="device_issue" class="form-input" placeholder="e.g. iPhone 14 — cracked screen">
+  </div>
+  <div class="form-group">
+    <label class="form-label">Message</label>
+    <textarea name="message" class="form-input" placeholder="Tell us more…"></textarea>
+  </div>
+  
+  <input type="text" name="_gotcha" style="display:none">
+  
+  <button type="submit" id="form-submit" class="btn-primary" style="width:100%; border:none; font-size:0.72rem;">Send Message →</button>
+</form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo" style="font-size:0.95rem;">
+    <div class="logo-icon">
+      <svg width="14" height="14" fill="none" stroke="#00c8ff" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+    </div>
+    <div class="logo-text">NAGA <span>MOBILES</span></div>
+  </div>
+  <p class="footer-copy">© 2026 Naga Mobiles · Coimbatore · All rights reserved</p>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/918110056006" class="wa-btn" target="_blank" rel="noopener">
+  <div class="wa-pulse"></div>
+  <svg width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.407 3.481s3.48 5.232 3.48 8.412c-.003 6.557-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.313 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.821-.981z"/></svg>
+</a>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top  = my - 6 + 'px';
+});
+
+(function animRing() {
+  rx += (mx - rx) * 0.1;
+  ry += (my - ry) * 0.1;
+  ring.style.left = rx - 20 + 'px';
+  ring.style.top  = ry - 20 + 'px';
+  requestAnimationFrame(animRing);
+})();
+
+document.querySelectorAll('a, button, .svc-card, .why-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2.5)';
+    ring.style.width = '60px';
+    ring.style.height = '60px';
+    ring.style.borderColor = 'rgba(0,200,255,0.8)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.width = '40px';
+    ring.style.height = '40px';
+    ring.style.borderColor = 'rgba(0,200,255,0.5)';
+  });
+});
+
+// Nav compact on scroll
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 60);
+});
+
+// Intersection observer for animations
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('show'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.svc-card, .why-card, .stat-item').forEach(el => obs.observe(el));
+
+// Lazy load card backgrounds
+const bgObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bg = entry.target.querySelector('.card-bg');
+      if (bg && bg.style.backgroundImage) { /* already set inline */ }
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.svc-card').forEach(el => bgObs.observe(el));
+const form = document.querySelector("form");
+const btn = document.getElementById("form-submit");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault(); // Stop the redirect
+  btn.innerText = "SENDING...";
+  btn.disabled = true;
+
+  const data = new FormData(form);
+  
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      btn.innerText = "MESSAGE SENT! ✓";
+      btn.style.background = "var(--glow3)"; // Turns green on success
+      form.reset(); // Clears the form
+    } else {
+      btn.innerText = "ERROR! TRY AGAIN";
+      btn.disabled = false;
+    }
+  } catch (error) {
+    btn.innerText = "CONNECTION ERROR";
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
